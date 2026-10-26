@@ -15,18 +15,15 @@ interface Props {
   onOrden: (orden: Orden) => void
 }
 
-//* TODO M3: recibir también busqueda y onBuscar
 export function FiltrosPeliculas({busqueda, genero, orden, generos, onGenero, onOrden, onBuscar }: Props) {
-  //* TODO M3: el texto del input en su propio useState (input controlado)
   const [ texto, setTexto ] = useState(busqueda)
-  //* TODO M3: enviar(e): e.preventDefault() y avisar al padre con onBuscar(texto.trim())
   function enviar(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     onBuscar(texto.trim())
   }
 
   // TMDB no deja combinar búsqueda por texto con género u orden
-  const buscando = busqueda !== '' //* TODO M3: busqueda !== ''
+  const buscando = busqueda !== ''
 
   function limpiar() {
     setTexto('')
@@ -35,7 +32,6 @@ export function FiltrosPeliculas({busqueda, genero, orden, generos, onGenero, on
 
   return (
     <div className="mb-8 flex flex-wrap items-end gap-3">
-      {/* TODO M3: onSubmit={enviar} */}
       <form onSubmit={enviar} className="flex min-w-64 flex-1 gap-2" role="search">
         <div className="relative flex-1">
           <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />

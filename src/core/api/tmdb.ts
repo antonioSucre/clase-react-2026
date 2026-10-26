@@ -25,6 +25,7 @@ tmdb.interceptors.response.use(
   (respuesta) => respuesta,
   (error) => {
     if (axios.isCancel(error)) return Promise.reject(error) // cancelación: se deja pasar tal cual
+    if (!axios.isAxiosError(error)) return Promise.reject(error) // p. ej. "Falta VITE_TMDB_TOKEN": no es un fallo de red
     const estado = axios.isAxiosError(error) ? error.response?.status : undefined
     const mensajes: Record<number, string> = {
       401: 'Token de TMDB inválido',
